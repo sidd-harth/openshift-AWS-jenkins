@@ -7,9 +7,8 @@ pipeline {
   stage('Check Parameters') {
    steps {
     echo "Application Name - ${APP_NAME}"
-    echo "Project Name - ${DEV_NAME}"
+    echo "Project Name - ${PROJECT_NAME}"
     echo "Master Host - ${MASTER_URL}"
-    echo "Number of Replicas - ${SCALE_APP}"
    }
   }
 
@@ -63,7 +62,7 @@ pipeline {
    steps {
     sh 'oc login ${MASTER_URL} --token=${OAUTH_TOKEN} --insecure-skip-tls-verify'
 
-    sh 'oc project ${DEV_NAME}'
+    sh 'oc project ${PROJECT_NAME}'
 
    sh 'oc delete all --all'
      // clean up. keep the imagestream
