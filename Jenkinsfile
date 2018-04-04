@@ -97,6 +97,8 @@ pipeline {
     sh 'sleep 60s'
    }
   }
+  
+  /*
   stage('Integration Tests') {
    steps {
     parallel(
@@ -130,7 +132,7 @@ pipeline {
     sh 'oc expose svc/${APP_NAME} -n ${PROD_NAME}'
    }
   }
-
+*/
   stage('Scaling Application') {
    steps {
     sh ' oc scale --replicas=${SCALE_APP} dc ${APP_NAME} -n ${PROD_NAME}'
