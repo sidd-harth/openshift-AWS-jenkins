@@ -6,9 +6,8 @@ pipeline {
  stages {
   stage('Check Parameters') {
    steps {
-    echo "Production App Name - ${PROD_NAME}"
     echo "Application Name - ${APP_NAME}"
-    echo "Development App Name - ${DEV_NAME}"
+    echo "Project Name - ${DEV_NAME}"
     echo "Master Host - ${MASTER_URL}"
     echo "Number of Replicas - ${SCALE_APP}"
    }
@@ -94,7 +93,7 @@ pipeline {
    steps {
     sh 'oc new-app ${APP_NAME}'
     sh 'oc expose svc/${APP_NAME}'
-    sh 'sleep 60s'
+    //sh 'sleep 60s'
    }
   }
   
@@ -135,7 +134,7 @@ pipeline {
 */
   stage('Scaling Application') {
    steps {
-    sh ' oc scale --replicas=${SCALE_APP} dc ${APP_NAME} -n ${PROD_NAME}'
+    sh ' oc scale --replicas=${SCALE_APP} dc ${APP_NAME} -n ${DEV_NAME}'
    }
   }
 
