@@ -72,8 +72,12 @@ pipeline {
    // sh "oc new-build --name=${APP_NAME} --image-stream=redhat-openjdk18-openshift --binary=true --labels=app=${APP_NAME} -n ${DEV_NAME} || true"
 	              
 
-
-   sh 'oc new-build --name=${APP_NAME} redhat-openjdk18-openshift --binary=true'
+   //************ below cmd works perfectly fine for Openshift AWS(office) & Openshift Origin(personal) insatnces 
+   //sh 'oc new-build --name=${APP_NAME} redhat-openjdk18-openshift --binary=true'
+   
+   //below cmd is specially for Openshift online which has multiple image streams & hence need to use the tag
+	sh 'oc new-build --name=${APP_NAME} --image-stream="openshift/redhat-openjdk18-openshift:1.1" --binary=true'   
+	   
    }
   }
 
